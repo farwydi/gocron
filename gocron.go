@@ -29,6 +29,7 @@ var (
 	ErrNotScheduledWeekday   = errors.New("job not scheduled weekly on a weekday")
 	ErrJobNotFoundWithTag    = errors.New("no jobs found with given tag")
 	ErrUnsupportedTimeFormat = errors.New("the given time format is not supported")
+	ErrConcurrentJobNegative = errors.New("concurrent job should be more than 1")
 )
 
 // regex patterns for supported time formats

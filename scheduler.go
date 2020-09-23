@@ -39,8 +39,12 @@ func NewScheduler(loc *time.Location) *Scheduler {
 
 // SetMaxConcurrentJobs limits how many jobs can be running at the same time.
 // This is useful when running resource intensive jobs and a precise start time is not critical.
-func (s *Scheduler) SetMaxConcurrentJobs(n int) {
+func (s *Scheduler) SetMaxConcurrentJobs(n int) error {
+	if n < 1 {
+		return ErrConcurrentJobNegative
+	}
 	s.sem = semaphore.NewWeighted(int64(n))
+	return nil
 }
 
 // StartBlocking starts all the pending jobs using a second-long ticker and blocks the current thread
